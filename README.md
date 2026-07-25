@@ -44,7 +44,7 @@ Database sudah terkonfigurasi secara *online* di **Neon PostgreSQL Cloud**, sehi
 ### 2. Run Aplikasi via Terminal/CLI
 ```bash
 # 1. Clone repository ini
-git clone [https://github.com/](https://github.com/)[USERNAME_GITHUB_KAMU]/RoomBookingApp.git
+git clone https://github.com/SyafrizalWdMahendra/book-sys.git
 
 # 2. Masuk ke folder project
 cd RoomBookingApp
