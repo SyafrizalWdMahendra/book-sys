@@ -34,6 +34,17 @@ Dibuat untuk memenuhi instruksi **Technical Test - Kalbe Nutritionals**.
 
 ---
 
+## 🔑 Akun Pengujian (Testing Credentials)
+
+Untuk mempermudah proses pengujian aplikasi, Anda dapat menggunakan akun bawaan yang sudah terdaftar pada database berikut:
+
+| Role | Username | Password | Deskripsi Akses |
+| :--- | :--- | :--- | :--- |
+| **Admin** | `admin` | `Password123!` | Akses penuh untuk melihat dan mengelola seluruh data booking |
+| **User** | `syafrizal` | `Password123!` | Akses user biasa untuk membuat dan mengelola booking pribadi |
+
+---
+
 ## ⚙️ Cara Menjalankan Program (Setup & Run)
 
 Database sudah terkonfigurasi secara *online* di **Neon PostgreSQL Cloud**, sehingga Anda **tidak perlu mengkonfigurasi database lokal**. Cukup jalankan langkah di bawah ini:
@@ -44,7 +55,7 @@ Database sudah terkonfigurasi secara *online* di **Neon PostgreSQL Cloud**, sehi
 ### 2. Run Aplikasi via Terminal/CLI
 ```bash
 # 1. Clone repository ini
-git clone https://github.com/SyafrizalWdMahendra/book-sys.git
+git clone [https://github.com/SyafrizalWdMahendra/book-sys.git](https://github.com/SyafrizalWdMahendra/book-sys.git)
 
 # 2. Masuk ke folder project
 cd book-sys/
