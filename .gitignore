@@ -482,3 +482,11 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Custom Archives
+book-sys.zip
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
