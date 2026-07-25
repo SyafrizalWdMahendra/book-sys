@@ -47,7 +47,7 @@ Database sudah terkonfigurasi secara *online* di **Neon PostgreSQL Cloud**, sehi
 git clone https://github.com/SyafrizalWdMahendra/book-sys.git
 
 # 2. Masuk ke folder project
-cd RoomBookingApp
+cd book-sys/
 
 # 3. Restore dependencies & Run
 dotnet restore
