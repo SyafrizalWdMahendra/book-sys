@@ -1,0 +1,97 @@
+@model IEnumerable<RoomBookingApp.Models.Booking>
+@{
+    ViewData["Title"] = "Daftar Booking Ruangan";
+    int currentUserId = ViewBag.CurrentUserId ?? 0;
+    bool isMyBookingsOnly = ViewBag.MyBookingsOnly ?? false;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Daftar Booking Ruangan</h2>
+    <a asp-action="Create" class="btn btn-success">+ Tambah Booking Baru</a>
+</div>
+
+<div class="card mb-4 bg-light">
+    <div class="card-body">
+        <form method="get" asp-action="Index" class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label class="col-form-label font-weight-bold">Filter Tanggal:</label>
+            </div>
+            <div class="col-auto">
+                <input type="date" name="filterDate" class="form-control" value="@ViewBag.FilterDate" />
+            </div>
+            
+            <div class="col-auto">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="myBookingsOnly" value="true" id="myBookingsCheck" @(isMyBookingsOnly ? "checked" : "") />
+                    <label class="form-check-label font-weight-bold" for="myBookingsCheck">
+                        Hanya Booking Saya
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Filter</button>
+                <a asp-action="Index" class="btn btn-secondary">Reset</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>No</th>
+            <th>Ruangan</th>
+            <th>Kapasitas</th>
+            <th>Tanggal Booking</th>
+            <th>Pemesan</th>
+            <th>Catatan</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int no = 1; }
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="7" class="text-center text-muted">Belum ada data booking.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                bool isMyBooking = item.UserId == currentUserId;
+                <tr class="@(isMyBooking ? "table-warning" : "")">
+                    <td>@(no++)</td>
+                    <td><strong>@item.Room?.RoomName</strong></td>
+                    <td>@item.Room?.Capacity Orang</td>
+                    <td><span class="badge bg-info text-dark">@item.BookingDate.ToString("dd MMMM yyyy")</span></td>
+                    <td>
+                        @item.User?.FullName 
+                        @if (isMyBooking)
+                        {
+                            <span class="badge bg-success ms-1">Saya</span>
+                        }
+                    </td>
+                    <td>@(string.IsNullOrEmpty(item.Notes) ? "-" : item.Notes)</td>
+                    <td>
+                        @if (item.UserId == currentUserId || User.IsInRole("Admin"))
+                        {
+                            <div class="d-flex gap-1">
+                                <a asp-action="Edit" asp-route-id="@item.BookingId" class="btn btn-warning btn-sm">Edit</a>
+                                <form asp-action="Delete" asp-route-id="@item.BookingId" method="post" onsubmit="return confirm('Yakin ingin membatalkan booking ini?');">
+                                    <button type="submit" class="btn btn-danger btn-sm">Batal</button>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Hanya Lihat</span>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
